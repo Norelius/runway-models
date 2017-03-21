@@ -1,0 +1,57 @@
+type N: 1..5;
+type E: 0..200;
+
+type Philosopher : record {
+	state : either {
+		Thinking,
+		Eating,
+		Waiting,
+		Grabbing,
+	},
+    first: N,
+    second: N,
+    lastEaten: E;
+};
+
+var philosophers: Array<Philosophers>[N];
+var chopsticks: Array<Boolean>[N];
+
+rule step for p in philosophers {
+	p.lastEaten += 1;
+	match p.state {
+		Thinking {
+			p.state = Waiting;
+		}
+		Waiting {
+			if chopsticks[first] == false {
+				chopstick[first] == true;
+				p.state = Grabbing;
+			}
+		}
+		Grabbing {
+			if chopsticks[second] == false {
+				chopstick[second] == true;
+				p.state = Eating;
+			}
+		}
+		Eating {
+			p.lastEaten = 0;
+			chopsticks[second] = false;
+			chopstick[first] == false;
+			p.state = Thinking;
+		}
+	}
+	}
+};
+
+function init() {
+  for i, p in philosophers {
+  	p.lastEaten = 0;
+    p.first = i;
+    p.seond = (i+1) % 5;
+    if i == 1 {
+        p.first = p.second;
+        p.second = i;
+    }
+  }
+}

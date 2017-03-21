@@ -1,0 +1,18 @@
+{
+  "name": "dining",
+  "version": "0.1",
+  "description": "Model of Dining Philosophers for Runway, pardis17",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Norelius/runway-models/dining.git"
+  },
+  "author": "Jenny Norelius <jenny.norelius@gmail.com>",
+  "runway-label": "Dining Philosophers",
+  "models": [
+    {
+      "id": "dining",
+      "label": "Dining Philosophers",
+      "spec": "dining.model"
+    }
+  ]
+}
